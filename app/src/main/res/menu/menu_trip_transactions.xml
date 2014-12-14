@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.budapest.budgy.TripTransactionsActivity">
+    <item android:id="@+id/transactions" android:title="@string/transactions"
+        android:orderInCategory="100" android:showAsAction="always" />
+    <item android:id="@+id/visualize" android:title="@string/visualize"
+        android:orderInCategory="100" android:showAsAction="always" />
+    <item android:id="@+id/inProgress" android:title="@string/inProgress"
+        android:orderInCategory="100" android:showAsAction="always" />
+</menu>
