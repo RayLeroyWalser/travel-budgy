@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -34,8 +36,11 @@ public class TripListActivity extends ListActivity {
 
         noTrips = (TextView) findViewById(R.id.tvNoTrips);
 
+        View v = getListView();
+
         updateList();
 
+        registerForContextMenu(v);
 
         Toast.makeText(this, "id: " + tripID, Toast.LENGTH_LONG).show();
 
@@ -96,7 +101,13 @@ public class TripListActivity extends ListActivity {
         Intent intent = new Intent(this, TripDetailActivity.class);
         intent.putExtra(TripDetailActivity.TRIP_ID, position);
         startActivity(intent);
-
-
     }
+
+    public void onCreateContextMenu(ContextMenu menu, ListView v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_delete, menu);
+    }
+
 }

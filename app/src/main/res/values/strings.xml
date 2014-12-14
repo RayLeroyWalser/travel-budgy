@@ -35,5 +35,6 @@
     <string name="transactionExampleDes">Ex: A Christmas Present!</string>
     <string name="transactionCategory">Category</string>
     <string name="payTo">Pay to:</string>
+    <string name="delete">Delete</string>
 
 </resources>

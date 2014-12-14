@@ -23,6 +23,8 @@ public class TripAdapter extends BaseAdapter {
     public TripAdapter(Context context, List<Trip> trips) {
         this.context = context;
         this.trips = trips;
+
+
     }
 
     public void addTrip(Trip trip) {

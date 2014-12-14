@@ -150,6 +150,7 @@ public class TripDetailActivity extends Activity {
                 return vf;
             }
             else
+                ipf.setTrip(trip);
                 return ipf;
 
          //   return PlaceholderFragment.newInstance(position + 1);

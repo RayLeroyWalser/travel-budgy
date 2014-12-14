@@ -52,6 +52,7 @@ public class TransactionAdapter extends BaseAdapter {
         TextView tvTransactionTitle;
         TextView tvTransactionCost;
         TextView tvTransactionDes;
+        TextView tvTransactionRecipient;
     }
 
     @Override
@@ -65,6 +66,8 @@ public class TransactionAdapter extends BaseAdapter {
             holder.tvTransactionTitle = (TextView) v.findViewById(R.id.tvTransactionTitle);
             holder.tvTransactionCost = (TextView) v.findViewById(R.id.tvTransactionCost);
             holder.tvTransactionDes = (TextView) v.findViewById(R.id.tvTransactionDes);
+            holder.tvTransactionRecipient = (TextView) v.findViewById(R.id.tvRecipient);
+
             v.setTag(holder);
         }
 
@@ -74,6 +77,10 @@ public class TransactionAdapter extends BaseAdapter {
             holder.tvTransactionCost.setText(Double.toString(t.getCost()));
             holder.tvTransactionTitle.setText(t.getType() +  " - " + t.getName());
             holder.tvTransactionDes.setText(t.getDescription());
+            if(t.getPaid()==0) {
+                holder.tvTransactionRecipient.setText("Pay to: " + t.getRecipient());
+                holder.tvTransactionRecipient.setVisibility(View.VISIBLE);
+            }
         }
 
         return v;

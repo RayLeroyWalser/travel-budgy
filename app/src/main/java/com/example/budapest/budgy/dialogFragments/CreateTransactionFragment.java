@@ -81,7 +81,7 @@ public class CreateTransactionFragment extends DialogFragment {
                 String des = etDes.getText().toString();
                 String category = spinnerCat.getSelectedItem().toString();
                 double cost = Double.parseDouble(etCost.getText().toString());
-                String recipient = tvRecipient.getText().toString();
+                String recipient = etRecipient.getText().toString();
 
                 int paid = 1;
                 if (!paidCheck.isChecked())

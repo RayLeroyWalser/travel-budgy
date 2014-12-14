@@ -76,7 +76,7 @@ public class VisualizeFragment extends Fragment {
   /*      for (int i = 0; i < categoryLinkerList.size(); i++) {
             NAME_LIST[i] = (categoryLinkerList.get(i)).getCategory().getName();
         }*/
-        NAME_LIST = new String[]{"Food", "Housing", "Attractions", "Other"};
+   //     NAME_LIST = new String[]{"Food", "Housing", "Attractions", "Other"};
 
         for (int i = 0; i < categoryLinkerList.size(); i++) {
             VALUES[i] = (categoryLinkerList.get(i)).getCategory().getAmount();
