@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.budapest.budgy.R;
 import com.example.budapest.budgy.TransactionsFragment;
+import com.example.budapest.budgy.TripDetailActivity;
 import com.example.budapest.budgy.data.Category;
 import com.example.budapest.budgy.data.Trip;
 import com.example.budapest.budgy.data.TripCategoryLinker;
@@ -79,6 +80,9 @@ public class CreateTransactionFragment extends DialogFragment {
                 transaction.save();
                 trip.setCurrentCost(trip.getCurrentCost() + cost);
                 trip.save();
+
+                TripDetailActivity tDA = (TripDetailActivity) getActivity();
+                tDA.updateTabView();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

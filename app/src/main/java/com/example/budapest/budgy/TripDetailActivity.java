@@ -65,25 +65,16 @@ public class TripDetailActivity extends Activity {
 
         trip = Trip.find(Trip.class,"trip_ID = ?", Integer.toString(TripID)).get(0);
 
-        tf = new TransactionsFragment();
-        vf = new VisualizeFragment();
-        ipf = new InProgressFragment();
+
 
         updateTabView();
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-      /*  mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        tabs.setShouldExpand(true);
-        tabs.setViewPager(mViewPager);*/
 
     }
 
-    private void updateTabView() {
+    public void updateTabView() {
+        tf = new TransactionsFragment();
+        vf = new VisualizeFragment();
+        ipf = new InProgressFragment();
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());

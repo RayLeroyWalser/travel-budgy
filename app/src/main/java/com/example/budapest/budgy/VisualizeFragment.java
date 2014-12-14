@@ -32,9 +32,9 @@ import org.achartengine.renderer.SimpleSeriesRenderer;
 
 public class VisualizeFragment extends Fragment {
 
-    private static int[] COLORS = new int[] { Color.GREEN, Color.BLUE,Color.MAGENTA, Color.CYAN };
+    private static int[] COLORS = new int[]{Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN};
     private static double[] VALUES; //= new double[] { 10, 11, 12, 13 };
-    private static String[] NAME_LIST; //= new String[] { "A", "B", "C", "D" };
+    private static String[] NAME_LIST;// = new String[] { "Food", "Housing", "Attractions", "Other" };
     private CategorySeries mSeries = new CategorySeries("");
     private DefaultRenderer mRenderer = new DefaultRenderer();
     private GraphicalView mChartView;
@@ -52,66 +52,44 @@ public class VisualizeFragment extends Fragment {
                 Long.toString(trip.getId()));
 
 
-        if(categoryLinkerList.size() > 0) {
+        getPieData();
 
-  //          Toast.makeText(getActivity(), "linkerlistsize: " + categoryLinkerList.size(), Toast.LENGTH_LONG).show();
-//            Toast.makeText(getActivity(), "1 : " + categoryLinkerList.get(0).getCategory().getName(), Toast.LENGTH_LONG).show();
-            //Toast.makeText(getActivity(), "linkerlistsize: " + categoryLinkerList.size(), Toast.LENGTH_LONG).show();
-            //Toast.makeText(getActivity(), "linkerlistsize: " + categoryLinkerList.size(), Toast.LENGTH_LONG).show();
+        LinearLayout layout = (LinearLayout) root.findViewById(R.id.chart);
+        mChartView = ChartFactory.getPieChartView(getActivity(), mSeries, mRenderer);
+        mRenderer.setClickEnabled(true);
+        mRenderer.setSelectableBuffer(10);
 
-            getPieData();
+        layout.addView(mChartView);
+
+        if (trip.getCurrentCost() != 0)
             makePieChart();
 
-        }
         return root;
     }
 
-    private void () {
-        NAME_LIST = new String[categoryLinkerList.size()];
+    private void getPieData() {
+        // NAME_LIST = new String[categoryLinkerList.size()];
         VALUES = new double[categoryLinkerList.size()];
 
-        for (int i = 0; i < categoryLinkerList.size(); i++) {
+  /*      for (int i = 0; i < categoryLinkerList.size(); i++) {
             NAME_LIST[i] = (categoryLinkerList.get(i)).getCategory().getName();
-        }
+        }*/
+        NAME_LIST = new String[]{"Food", "Housing", "Attractions", "Other"};
 
         for (int i = 0; i < categoryLinkerList.size(); i++) {
             VALUES[i] = (categoryLinkerList.get(i)).getCategory().getAmount();
         }
     }
 
-    @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        getPieData();
-        makePieChart();
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mChartView == null) {
-            LinearLayout layout = (LinearLayout) root.findViewById(R.id.chart);
-            mChartView = ChartFactory.getPieChartView(getActivity(), mSeries, mRenderer);
-            mRenderer.setClickEnabled(true);
-            mRenderer.setSelectableBuffer(10);
-
-            layout.addView(mChartView);
-        }
-        else {
-            mChartView.repaint();
-        }
-    }
-
 
     private void makePieChart() {
         mRenderer.setApplyBackgroundColor(true);
-      //  mRenderer.setBackgroundColor();
         mRenderer.setChartTitleTextSize(20);
         mRenderer.setLabelsTextSize(25);
         mRenderer.setLabelsColor(Color.BLACK);
         mRenderer.setLegendTextSize(30);
         mRenderer.setTextTypeface(Typeface.DEFAULT);
-        mRenderer.setMargins(new int[] { 0, 0, 0, 0 });
+        mRenderer.setMargins(new int[]{0, 0, 0, 0});
         mRenderer.setStartAngle(90);
 
         for (int i = 0; i < VALUES.length; i++) {

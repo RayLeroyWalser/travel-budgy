@@ -26,8 +26,6 @@ import java.util.List;
 public class TransactionsFragment extends ListFragment {
 
     public List<TripTransaction> transactions;
-    public static final String TRIP_ID = "Trip ID";
-    private int id;
     private View root;
     private TextView tvTotalCost;
     private Trip trip;
@@ -51,27 +49,6 @@ public class TransactionsFragment extends ListFragment {
 
 
         return root;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        transactions = TripTransaction.find(TripTransaction.class, "trip_Ref = ?", Integer.toString(id));
-        TransactionAdapter adapter = new TransactionAdapter(getActivity(), transactions);
-        setListAdapter(adapter);
-    }
-
-    @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        transactions = TripTransaction.find(TripTransaction.class, "trip_Ref = ?", Integer.toString(id));
-        TransactionAdapter adapter = new TransactionAdapter(getActivity(), transactions);
-        setListAdapter(adapter);
-    }
-
-    public void updateView(int i) {
-        List<TripTransaction> transactions = TripTransaction.find(TripTransaction.class, "trip_Ref = ?", Integer.toString(i));
-        TransactionAdapter adapter = new TransactionAdapter(getActivity(), transactions);
-        setListAdapter(adapter);
     }
 
     public void setTrip(Trip t) {
