@@ -51,6 +51,8 @@ public class VisualizeFragment extends Fragment {
         categoryLinkerList = TripCategoryLinker.find(TripCategoryLinker.class, "trip = ?",
                 Long.toString(trip.getId()));
 
+        NAME_LIST = new String[]{"Food", "Housing", "Attractions", "Other"};
+
 
         getPieData();
 

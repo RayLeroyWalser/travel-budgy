@@ -30,5 +30,10 @@
     <string name="food">Food</string>
     <string name="spendingCategory">Spendings by Category</string>
     <string name="noTrips">You have no trips yet! Add a new trip.</string>
+    <string name="paid">Paid?</string>
+    <string name="transactionExampleName">Hat for Mom</string>
+    <string name="transactionExampleDes">Ex: A Christmas Present!</string>
+    <string name="transactionCategory">Category</string>
+    <string name="payTo">Pay to:</string>
 
 </resources>

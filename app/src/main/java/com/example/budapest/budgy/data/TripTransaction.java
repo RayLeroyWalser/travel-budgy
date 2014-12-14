@@ -12,17 +12,22 @@ public class TripTransaction extends SugarRecord<TripTransaction> {
     private String description;
     private double cost;
     private String type;
+    private int paid;
+    private String recipient;
 
     public TripTransaction() {
 
     }
 
-    public TripTransaction(String name, int tripRef, String des, double cost, String type) {
+    public TripTransaction(String name, int tripRef, String des, double cost, String type,
+                           int paid, String recipient) {
         this.name = name;
         this.tripRef = tripRef;
         this.description = des;
         this.cost = cost;
         this.type = type;
+        this.paid = paid;
+        this.recipient = recipient;
     }
 
     public String getName() {
@@ -63,5 +68,21 @@ public class TripTransaction extends SugarRecord<TripTransaction> {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getPaid() {
+        return paid;
+    }
+
+    public void setPaid(int paid) {
+        this.paid = paid;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
     }
 }

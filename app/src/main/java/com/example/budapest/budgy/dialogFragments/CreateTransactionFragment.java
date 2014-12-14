@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.budapest.budgy.R;
@@ -29,19 +32,17 @@ import java.util.List;
 public class CreateTransactionFragment extends DialogFragment {
 
     public static final String TAG = "New Transaction";
-    public static final String TRIP_ID = "Trip ID";
-    private TripCategoryLinker tcLinker;
     private Trip trip;
-
+    private EditText etName;
+    private EditText etDes;
+    private EditText etCost;
+    private Spinner spinnerCat;
+    private CheckBox paidCheck;
+    private TextView tvRecipient;
+    private EditText etRecipient;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        /*String msg = getArguments().getString(TRIP_ID);
-        final int tripID = Integer.parseInt(msg);
-
-        final Trip currTrip = Trip.find(Trip.class,"trip_ID = ?", Integer.toString(tripID)).get(0);*/
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("New Transaction");
@@ -49,10 +50,30 @@ public class CreateTransactionFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.create_transaction_dialog, null);
 
-        final EditText etName = (EditText) v.findViewById(R.id.transactionName);
-        final EditText etDes = (EditText) v.findViewById(R.id.transactionDes);
-        final EditText etCost = (EditText) v.findViewById(R.id.transactionCost);
-        final Spinner spinnerCat = (Spinner) v.findViewById(R.id.spinner);
+        etName = (EditText) v.findViewById(R.id.transactionName);
+        etDes = (EditText) v.findViewById(R.id.transactionDes);
+        etCost = (EditText) v.findViewById(R.id.transactionCost);
+        spinnerCat = (Spinner) v.findViewById(R.id.spinner);
+        paidCheck = (CheckBox) v.findViewById(R.id.cbPaid);
+        tvRecipient = (TextView) v.findViewById(R.id.tvRecipient);
+        etRecipient = (EditText) v.findViewById(R.id.etRecipient);
+
+        paidCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    tvRecipient.setVisibility(View.INVISIBLE);
+                    etRecipient.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    tvRecipient.setVisibility(View.VISIBLE);
+                    etRecipient.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
 
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -60,6 +81,11 @@ public class CreateTransactionFragment extends DialogFragment {
                 String des = etDes.getText().toString();
                 String category = spinnerCat.getSelectedItem().toString();
                 double cost = Double.parseDouble(etCost.getText().toString());
+                String recipient = tvRecipient.getText().toString();
+
+                int paid = 1;
+                if (!paidCheck.isChecked())
+                    paid = 0;
 
                 List<TripCategoryLinker> tcLinkerList = TripCategoryLinker.find(TripCategoryLinker.class,
                         "trip = ?",
@@ -76,7 +102,8 @@ public class CreateTransactionFragment extends DialogFragment {
 
             //    Toast.makeText(getActivity(), "idfrag: " + tripID, Toast.LENGTH_LONG).show();
 
-                TripTransaction transaction = new TripTransaction(name, trip.getTripID(), des, cost, category);
+                TripTransaction transaction = new TripTransaction(name, trip.getTripID(), des, cost, category,
+                        paid, recipient);
                 transaction.save();
                 trip.setCurrentCost(trip.getCurrentCost() + cost);
                 trip.save();
@@ -109,5 +136,6 @@ public class CreateTransactionFragment extends DialogFragment {
     public void setTrip(Trip t) {
         trip = t;
     }
+
 
 }

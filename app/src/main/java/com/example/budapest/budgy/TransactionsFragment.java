@@ -26,13 +26,13 @@ import java.util.List;
 public class TransactionsFragment extends ListFragment {
 
     public List<TripTransaction> transactions;
-    private View root;
+    //private View root;
     private TextView tvTotalCost;
     private Trip trip;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = View.inflate(getActivity(), R.layout.fragment_transactions, null);
+        View root = View.inflate(getActivity(), R.layout.fragment_transactions, null);
 
         transactions = TripTransaction.find(TripTransaction.class, "trip_Ref = ?",
                 Integer.toString(trip.getTripID()));

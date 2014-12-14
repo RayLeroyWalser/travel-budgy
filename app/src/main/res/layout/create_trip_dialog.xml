@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fadingEdge="horizontal"
-            android:hint="Prague with Julie"
+            android:hint="Ex: Prague with Julie"
             android:paddingBottom="10dp"
             android:paddingTop="10dp" />
     </LinearLayout>
@@ -41,7 +41,7 @@
         <EditText
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
-            android:hint="A fun time."
+            android:hint="Ex: A fun time."
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"/>
     </LinearLayout>
