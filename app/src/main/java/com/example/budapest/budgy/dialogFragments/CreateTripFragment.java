@@ -67,8 +67,6 @@ public class CreateTripFragment extends DialogFragment  { //}, DatePickerDialog.
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final int tripID = getArguments().getInt(TRIP_ID);
 
-        Toast.makeText(getActivity(), "id: " + tripID, Toast.LENGTH_LONG).show();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("New Trip");
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -114,22 +112,10 @@ public class CreateTripFragment extends DialogFragment  { //}, DatePickerDialog.
                 String start = etStart.getText().toString();
                 String end = etEnd.getText().toString();
 
-
-
-                Toast.makeText(getActivity(), "id " + tripID, Toast.LENGTH_LONG).show();
-
                 Trip trip = new Trip(name, tripID, des, Double.parseDouble(cost), 0.00, start, end);
                 trip.save();
 
                 addDefaultCategories(trip);
-
-      /*          Toast.makeText(getActivity(), "tripID " + tripID, Toast.LENGTH_LONG).show();
-
-                List<Trip> test = Trip.find(Trip.class,"trip_ID = ?", Integer.toString(tripID));
-                List<Trip> test1 = Trip.find(Trip.class,"name = ?", name);
-                Toast.makeText(getActivity(), "size " + test.size(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getActivity(), "name size " + test1.size(), Toast.LENGTH_LONG).show();*/
-
 
                 Intent intent = new Intent(context, TripDetailActivity.class);
                 intent.putExtra(TripDetailActivity.TRIP_ID, tripID);

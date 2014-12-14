@@ -100,8 +100,6 @@ public class CreateTransactionFragment extends DialogFragment {
                     }
                 }
 
-            //    Toast.makeText(getActivity(), "idfrag: " + tripID, Toast.LENGTH_LONG).show();
-
                 TripTransaction transaction = new TripTransaction(name, trip.getTripID(), des, cost, category,
                         paid, recipient);
                 transaction.save();

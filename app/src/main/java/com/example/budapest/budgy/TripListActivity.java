@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,6 @@ public class TripListActivity extends ListActivity {
 
         registerForContextMenu(v);
 
-        Toast.makeText(this, "id: " + tripID, Toast.LENGTH_LONG).show();
 
     }
 
@@ -55,7 +55,6 @@ public class TripListActivity extends ListActivity {
         }
         else {
             noTrips.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "no trips!", Toast.LENGTH_LONG).show();
         }
         tripID = trips.size();
     }
@@ -87,7 +86,6 @@ public class TripListActivity extends ListActivity {
             Bundle b = new Bundle();
             b.putInt(CreateTripFragment.TRIP_ID, tripID);
             dialog.setArguments(b);
-            Toast.makeText(this, "id: " + tripID, Toast.LENGTH_LONG).show();
             dialog.show(getFragmentManager(), CreateTripFragment.TAG);
         }
 
@@ -103,11 +101,26 @@ public class TripListActivity extends ListActivity {
         startActivity(intent);
     }
 
-    public void onCreateContextMenu(ContextMenu menu, ListView v,
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View  v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_delete, menu);
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle().equals("Delete")) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+            Trip t = Trip.find(Trip.class, "trip_ID = ?", Integer.toString(info.position)).get(0);
+            t.delete();
+            updateList();
+        }
+        return true;
+    }
+
 
 }
